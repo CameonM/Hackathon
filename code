@@ -1,0 +1,116 @@
+import streamlit as st
+
+catalog = [
+            {"code": "INFO-I 101", "name": "Introduction to Informatics", "credits": 4, "type": "core", "prerequisites": []},
+            {"code": "INFO-I 201", "name": "Mathematical Foundations of Informatics", "credits": 4, "type": "core", "prerequisites": []},
+            {"code": "INFO-I 202", "name": "Social Informatics", "credits": 3, "type": "core", "prerequisites": ["INFO-I 101"]},
+            {"code": "INFO-I 210", "name": "Information Infrastructure I", "credits": 4, "type": "core", "prerequisites": []},
+            {"code": "INFO-I 211", "name": "Information Infrastructure II", "credits": 3, "type": "core", "prerequisites": ["INFO-I 210"]},
+            {"code": "INFO-I 300", "name": "Human-Computer Interaction Design and Programming", "credits": 3, "type": "core", "prerequisites": ["INFO-I 202"]},
+            {"code": "INFO-I 308", "name": "Information Representation", "credits": 3, "type": "core", "prerequisites": []},
+            {"code": "INFO-Y 395", "name": "Career Development for Informatics Majors", "credits": 4, "type": "core", "prerequisites": []},
+            {"code": "INFO-I 301", "name": "Presentations for IT Professionals", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 303", "name": "Organizational Informatics", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 304", "name": "Introduction to Virtual Reality", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 310", "name": "Multimedia Arts and Technology", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 311", "name": "Application Development", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 320", "name": "Distributed Systems and Collaborative Computing", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 330", "name": "Legal and Social Informatics of Security", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 341", "name": "Prototyping for Arduino Tools", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 342", "name": "Mobile Programming", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 345", "name": "Interaction Design Research", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 346", "name": "Prototyping and Evaluation", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 356", "name": "Globalization, Where We Fit In", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 360", "name": "Web Design", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 363", "name": "Visual Design for the Web", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 365", "name": "JavaScript", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 368", "name": "Introduction to Network Science", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 369", "name": "Performance Analytics", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 370", "name": "Methods for HCC", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 399", "name": "Current Topics in Informatics", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 400", "name": "Topics in Informatics", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 421", "name": "Applications of Data Mining", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 422", "name": "Data Visualization", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 423", "name": "Big Data Applications and Analytics", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 424", "name": "Big Data Software and Projects", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 426", "name": "Informatics in Disasters and Emergency Response", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 427", "name": "Search Informatics", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 430", "name": "Security for Networked Systems", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 433", "name": "Systems & Protocol Security & Information Assurance", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 435", "name": "Management, Access, and Use of Big and Complex Data", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 436", "name": "Technology Innovation", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 437", "name": "Design Strategy", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 438", "name": "Technology Entrepreneurship", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 440", "name": "Human Robot Interaction", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 441", "name": "Interaction Design Practice", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 442", "name": "Creating Virtual Assets", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 443", "name": "Building Virtual Worlds", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 444", "name": "Artificial Life in Virtual Reality", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 453", "name": "Computer and Information Ethics", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 454", "name": "Tech Ethics & Popular Culture", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 457", "name": "Immersive Storytelling and Experience Design", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 468", "name": "Advanced Network Science", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 469", "name": "Collective Intelligence", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 485", "name": "Bioinspired Computing", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 486", "name": "Artificial Life", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 487", "name": "Introduction to Virtual Heritage", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 488", "name": "Advanced Topics in Virtual Heritage", "credits": 3, "type": "advanced", "prerequisites": []},
+            {"code": "INFO-I 492", "name": "Capstone in Informatics", "credits": 3, "type": "capstone", "prerequisites": []},
+            {"code": "INFO-I 493", "name": "Capstone in Information Technology", "credits": 3, "type": "capstone", "prerequisites": []},
+            {"code": "INFO-I 497", "name": "Capstone in Informatics", "credits": 3, "type": "capstone", "prerequisites": []}
+        ]
+
+completed_courses = st.session_state.get("completed_courses", [])
+
+st.title("Smart Course Selector AI Agent")
+st.markdown("Helping you choose courses based on your career goals and preferences.")
+
+career = st.selectbox("What's your intended career path?", ["Data Scientist", "UX Designer", "Product Manager", "Cybersecurity Analyst"])
+available_credits = st.slider("How many credits do you want to take next semester?", 3, 18, 12)
+completed_courses = st.multiselect("Select the courses you've already completed:", [course["code"] for course in catalog])
+
+@st.cache_data
+def recommend_courses(career, completed, max_credits):
+    recommendations = []
+    credit_total = 0
+    goal_keywords = {
+        "Data Scientist": ["Data", "Mining", "Visualization", "Big"],
+        "UX Designer": ["Human", "Design", "Interaction", "HCI"],
+        "Product Manager": ["Project", "Management", "Design", "Application"],
+        "Cybersecurity Analyst": ["Security", "Assurance", "Network", "Systems"]
+    }
+    
+    for course in catalog:
+        if course["code"] in completed:
+            continue
+        if any(prereq not in completed for prereq in course["prerequisites"]):
+            continue
+        if any(keyword in course["name"] for keyword in goal_keywords[career]):
+            if credit_total + course["credits"] <= max_credits:
+                recommendations.append(course)
+                credit_total += course["credits"]
+
+    if credit_total < max_credits:
+        for course in catalog:
+            if course in recommendations or course["code"] in completed:
+                continue
+            if any(prereq not in completed for prereq in course["prerequisites"]):
+                continue
+            if credit_total + course["credits"] <= max_credits:
+                recommendations.append(course)
+                credit_total += course["credits"]
+
+    return recommendations
+
+if st.button("Generate Course Plan"):
+    plan = recommend_courses(career, completed_courses, available_credits)
+    if not plan:
+        st.warning("No suitable courses found. Try increasing your credit limit or completing more prerequisites.")
+    else:
+        st.success("Here's your recommended course plan:")
+        for course in plan:
+            st.markdown(f"**{course['code']}** - {course['name']} ({course['credits']} credits)")
+
+        total_credits = sum(course['credits'] for course in plan)
+        st.progress(min(int((total_credits / available_credits) * 100), 100))
+        st.caption(f"Total Credits Planned: {total_credits} / {available_credits}")
